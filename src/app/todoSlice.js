@@ -5,6 +5,8 @@ const initialStateFromLocal = () => {
   return (
     JSON.parse(localStorage.getItem("todos")) || {
       todos: [],
+      completed:0,
+      uncompleted:0
     }
   );
 };
@@ -34,6 +36,17 @@ const todoSlice = createSlice({
     },
     calculateTotal:(state) => {
       localStorage.setItem("todos", JSON.stringify(state))
+      let completed = 0
+      let uncompleted = 0
+      state.todos.forEach((todo)=>{
+        if(todo.completed){
+          completed += 1 
+        } else {
+          uncompleted += 1
+        }
+      })
+      state.completed = completed
+      state.uncompleted = uncompleted
     }
   },
 });

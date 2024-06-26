@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addTodo, removeTodo, changeStatusTodo } from "./app/todoSlice";
 function App() {
   const inputText = useRef();
-  const { todos } = useSelector((state) => state.todos);
+  const { todos , uncompleted , completed } = useSelector((state) => state.todos);
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,6 +30,10 @@ function App() {
   return (
     <div>
       <h1 className="mb-5">Todo List - {todos.length}</h1>
+      <div className=" flex gap-5 justify-center mb-5">
+        <h4>Competed: {completed}</h4>
+        <h4>Uncompeted: {uncompleted}</h4>
+      </div>
       <form onSubmit={handleSubmit} className="flex gap-5">
         <label htmlFor="input">
           Text:
